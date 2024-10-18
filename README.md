@@ -2,6 +2,8 @@
 
 ### Data Science Pipeline
 
+<img width="1582" alt="Screenshot 2024-10-18 at 4 01 16 PM" src="https://github.com/user-attachments/assets/35043917-f114-4395-b491-8749aa6d02d3">
+
 This project implements a complete data science pipeline, including:
 
 1. **Data Collection**: Insurance data is collected and stored in a SQLite database. The data includes features such as age, BMI, smoking status, number of children, region, and the corresponding insurance charges.
