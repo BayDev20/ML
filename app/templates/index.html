@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Insurance Records{% endblock %}
+
+{% block content %}
+<h1>Insurance Records</h1>
+<div class="card">
+    <!-- Table to display insurance records -->
+    <table>
+        <thead>
+            <tr>
+                <th>Age</th>
+                <th>Sex</th>
+                <th>BMI</th>
+                <th>Children</th>
+                <th>Smoker</th>
+                <th>Region</th>
+                <th>Charges</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through each record and display its details -->
+            {% for record in records %}
+            <tr>
+                <td>{{ record.age }}</td>
+                <td>{{ record.sex }}</td>
+                <td>{{ record.bmi }}</td>
+                <td>{{ record.children }}</td>
+                <td>{{ record.smoker }}</td>
+                <td>{{ record.region }}</td>
+                <td>${{ record.charges|round(2) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

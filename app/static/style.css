@@ -1,0 +1,212 @@
+/* Define color variables for consistent use throughout the stylesheet */
+:root {
+    --beige: #e5c99a;
+    --dark-teal: #005572;
+    --teal: #006a80;
+    --light-blue: #88b9dd;
+    --gold: #e7bd42;
+}
+
+/* Global styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+/* Navigation styles */
+nav {
+    background-color: var(--dark-teal);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    flex-grow: 1;
+}
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: var(--teal);
+}
+
+/* Header styles */
+h1 {
+    color: var(--dark-teal);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Card styles */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card-container .card {
+    flex-basis: calc(33.33% - 20px);
+    margin-bottom: 20px;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--light-blue);
+    color: var(--dark-teal);
+    font-weight: bold;
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: var(--dark-teal);
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    background-color: var(--teal);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--dark-teal);
+}
+
+/* Prediction result styles */
+.prediction {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--dark-teal);
+    background-color: var(--beige);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Insights page specific styles */
+.card h2 {
+    color: var(--teal);
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+.card p {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--dark-teal);
+    margin-bottom: 0;
+}
+
+/* Index page specific styles */
+.card table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.card table th {
+    background-color: var(--teal);
+    color: white;
+}
+
+.card table tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+.card table tr:hover {
+    background-color: var(--beige);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .card-container .card {
+        flex-basis: 100%;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin-bottom: 5px;
+    }
+}
+
+/* Chart styles */
+.chart-card {
+    flex-basis: 100% !important;
+    margin-bottom: 30px;
+}
+
+.chart-card canvas {
+    max-height: 300px;
+}

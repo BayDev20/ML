@@ -1,0 +1,43 @@
+# Ignore the dist directory
+dist/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+*.venv
+env/
+
+# IDE specific files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Python package files
+*.egg-info/
+*.egg
+
+# Database files
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Build files
+build/
+
+# Compiled Python files
+*.pyc
+
+# Joblib files (for your ML models)
+*.joblib
+

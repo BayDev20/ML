@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Insurance App{% endblock %}</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation menu -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('main.index') }}">Home</a></li>
+            <li><a href="{{ url_for('main.add_record') }}">Add Record</a></li>
+            <li><a href="{{ url_for('main.predict') }}">Predict</a></li>
+            <li><a href="{{ url_for('main.insights') }}">Insights</a></li>
+        </ul>
+    </nav>
+    <!-- Main content area -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

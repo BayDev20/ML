@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block title %}Insurance Insights{% endblock %}
+
+{% block content %}
+<h1>Insurance Insights</h1>
+<div class="card-container">
+    <div class="card summary-card">
+        <h2>Total Records</h2>
+        <p class="large-number">{{ total_records }}</p>
+    </div>
+    <div class="card summary-card">
+        <h2>Average Charge</h2>
+        <p class="large-number">${{ avg_charge|round(2) }}</p>
+    </div>
+    <div class="card summary-card">
+        <h2>Maximum Charge</h2>
+        <p class="large-number">${{ max_charge|round(2) }}</p>
+    </div>
+</div>
+
+<div class="card-container">
+    <div class="card chart-card">
+        <h2>Average Charges: Smokers vs Non-Smokers</h2>
+        <canvas id="smokerChart"></canvas>
+    </div>
+    <div class="card chart-card">
+        <h2>Age Distribution</h2>
+        <canvas id="ageDistributionChart"></canvas>
+    </div>
+</div>
+
+<div class="card-container">
+    <div class="card chart-card">
+        <h2>BMI vs Charges</h2>
+        <canvas id="bmiVsChargesChart"></canvas>
+    </div>
+</div>
+
+<script>
+    var chartData = {
+        smokerAvg: {{ smoker_avg|round(2) }},
+        nonSmokerAvg: {{ non_smoker_avg|round(2) }},
+        ageDistributionLabels: {{ age_distribution.keys()|list|tojson }},
+        ageDistributionValues: {{ age_distribution.values()|list }},
+        bmiChargesData: JSON.parse('{{ bmi_charges_data|safe }}')
+    };
+
+    console.log('BMI Charges Data:', chartData.bmiChargesData);
+
+    // Smokers vs Non-Smokers Chart
+    var ctx = document.getElementById('smokerChart').getContext('2d');
+    var smokerChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Smokers', 'Non-Smokers'],
+            datasets: [{
+                label: 'Average Charges',
+                data: [chartData.smokerAvg, chartData.nonSmokerAvg],
+                backgroundColor: ['#e7bd42', '#88b9dd']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Average Charges: Smokers vs Non-Smokers'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Average Charges ($)'
+                    }
+                }
+            }
+        }
+    });
+
+    // Age Distribution Chart
+    var ageCtx = document.getElementById('ageDistributionChart').getContext('2d');
+    var ageDistributionChart = new Chart(ageCtx, {
+        type: 'bar',
+        data: {
+            labels: chartData.ageDistributionLabels,
+            datasets: [{
+                label: 'Number of People',
+                data: chartData.ageDistributionValues,
+                backgroundColor: '#006a80'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Age Distribution'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Number of People'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Age Groups'
+                    }
+                }
+            }
+        }
+    });
+
+    // BMI vs Charges Scatter Plot
+    var bmiCtx = document.getElementById('bmiVsChargesChart').getContext('2d');
+    var bmiVsChargesChart = new Chart(bmiCtx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'BMI vs Charges',
+                data: chartData.bmiChargesData,
+                backgroundColor: '#e5c99a'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'BMI vs Charges'
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: 'BMI'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Charges ($)'
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+<style>
+    .card-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+    }
+
+    .summary-card {
+        flex: 1;
+        margin: 0 10px;
+    }
+
+    .summary-card h2 {
+        color: #333;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+
+    .large-number {
+        color: #007bff;
+        font-size: 2em;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .chart-card {
+        width: 100%;
+        height: 300px;
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
